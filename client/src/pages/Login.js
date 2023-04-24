@@ -45,7 +45,7 @@ function Login() {
           onChange={handleChange}
           value={values.email}
           onBlur={handleBlur}
-          autoFocus
+          
         />
         {errors.email && touched.email && (
           <div className="text-red-600">{errors.email}</div>
