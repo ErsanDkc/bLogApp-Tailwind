@@ -13,14 +13,17 @@ function Login() {
       },
 
       onSubmit: (values) => {
+        let email = values.email
+        let password = values.password
+        console.log(email,password);
         axios
           .post("http://localhost:5000/api/login", {
-            email: values.email,
-            password: values.password,
+            email: email,
+            password: password,
           })
           .then((res) => {
-            localStorage.setItem("token", res.data.token);
-            localStorage.setItem("user", res.data.user);
+            localStorage.setItem("token", JSON.stringify(res.data.token));
+            localStorage.setItem("user", JSON.stringify(res.data.user) );
             navigate("/");
           })
           .catch((err) => {

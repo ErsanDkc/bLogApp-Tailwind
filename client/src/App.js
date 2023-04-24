@@ -6,7 +6,7 @@ import Register from "./pages/Register";
 
 function App() {
   return (
-    <div className="bg-neutral-100 h-full">
+    <div className="h-full">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />

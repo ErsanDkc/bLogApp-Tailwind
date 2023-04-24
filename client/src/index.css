@@ -5,7 +5,7 @@
 
 @layer base {
   html,body, #root {
-    @apply h-full
+    @apply h-full bg-neutral-100
   }
 }
 
