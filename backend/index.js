@@ -44,7 +44,7 @@ const secretKey = "Secret key secret key 12345";
 const options = {
     expiresIn: "1h"
 }
-//a
+
 
 app.post("/api/register",upload.single("avatar"), async(req,res) => {
     try {
