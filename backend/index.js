@@ -5,10 +5,14 @@ const app = express();
 const multer = require("multer");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+const path = require("path")
 
 app.use(express.json());
 
 app.use(cors());
+
+// resim dosyalarını okumak için izin ver 
+app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 
 const api =
   "mongodb+srv://root:1@blog.k1kdhis.mongodb.net/?retryWrites=true&w=majority";
