@@ -12,6 +12,11 @@ function Layout() {
   useEffect(() => {
     checkLogin();
   }, [checkLogin]);
+
+  const logout = () => {
+    localStorage.clear();
+    
+  }
   return (
     <>
       <nav className="bg-gradient-to-r from-indigo-500 ... h-[72px] flex items-center px-4">
@@ -23,7 +28,7 @@ function Layout() {
           </li>
           <li>
             <NavLink to="/login">
-              <button className="bg-red-600 py-2 px-4 text-white rounded border-solid border-white tracking-[1.5px]">
+              <button onClick={logout} className="bg-red-600 py-2 px-4 text-white rounded border-solid border-white tracking-[1.5px]">
                 Logout
               </button>
             </NavLink>

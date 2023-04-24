@@ -45,7 +45,7 @@ const options = {
     expiresIn: "1h"
 }
 
-
+//register
 app.post("/api/register",upload.single("avatar"), async(req,res) => {
     try {
         const {name,email,password} = req.body
@@ -70,5 +70,24 @@ app.post("/api/register",upload.single("avatar"), async(req,res) => {
         res.status(200).json({message: error.message})
     }
 })
+
+//login
+app.post("/api/login", async(req,res) => {
+    try {
+        const {email,password} = req.body;
+        const user = await User.findOne({email:email, password:password})
+        if(user === null) {
+            res.status(403).json({message: "Mail adresi ya da şifre yanlış"})
+        }else {
+            const payload = {}
+            const token = jwt.sign(payload,secretKey,options)
+
+            res.json({token:token, user:user})
+        }
+    } catch (error) {
+        res.status(500).json({message : error.message})
+    }
+})
+
 
 app.listen(5000, () => console.log("Server is UP! at 5000 port"))

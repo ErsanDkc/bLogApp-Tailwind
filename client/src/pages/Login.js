@@ -2,29 +2,33 @@ import React from "react";
 import { useFormik } from "formik";
 import validationSchema from "./validationLogin";
 import { NavLink, useNavigate } from "react-router-dom";
-
+import axios from "axios";
 function Login() {
   const navigate = useNavigate();
-  const {
-    handleChange,
-    handleSubmit,
-    handleBlur,
-    values,
-    errors,
-    touched,
-    
-  } = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
+  const { handleChange, handleSubmit, handleBlur, values, errors, touched } =
+    useFormik({
+      initialValues: {
+        email: "",
+        password: "",
+      },
 
-    onSubmit: (values) => {
-      // api isteği
-      navigate("/");
-    },
-    validationSchema,
-  });
+      onSubmit: (values) => {
+        axios
+          .post("http://localhost:5000/api/login", {
+            email: values.email,
+            password: values.password,
+          })
+          .then((res) => {
+            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("user", res.data.user);
+            navigate("/");
+          })
+          .catch((err) => {
+            alert(err.response.data.message)
+          });
+      },
+      validationSchema,
+    });
   return (
     <div className="min-h-1/2 flex flex-col justify-center items-center gap-9">
       <h1 className="text-[40px] font-extrabold tracking-[2px]">Login</h1>
