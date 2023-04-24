@@ -1,13 +1,9 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-// import { useSelector } from 'react-redux'
-// import { getAllPosts } from '../redux/post/postSlice'
-// import TimeAgo from './TimeAgo'
-// import ReactionButtons from './ReactionButtons'
+import React, { useEffect} from "react";
+
 function PostList({ getPost, posts }) {
   useEffect(() => {
     getPost();
-  }, []);
+  }, [getPost]);
 
   const showPost = posts.map((post) => (
     <article
@@ -22,7 +18,7 @@ function PostList({ getPost, posts }) {
         <h4 className="text-normal italic capitalize">
           by {post.users[0].name}
         </h4>
-        <img src={`http://localhost:5000/${post.users[0].avatar.path}`} style={{width: "50px", height:"50px", objectFit:"cover", borderRadius:"999px"}} />    
+        <img src={`${process.env.REACT_APP_BASE_ENDPOINT}/${post.users[0].avatar.path}`} style={{width: "50px", height:"50px", objectFit:"cover", borderRadius:"999px"}} alt={post.users[0].name} />    
         </span>
       </span>
       <p className="text-2xl text-zinc-600 normal-case whitespace-normal tracking-wide leading-relaxed">

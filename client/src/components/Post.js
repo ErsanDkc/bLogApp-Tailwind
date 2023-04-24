@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import axios from "axios";
 import PostList from "./PostList";
 
@@ -7,17 +7,19 @@ function Post() {
   const [title,setTitle] = useState("")
   const [posts,setPosts] = useState([])  
 
-  const getPost = () => {
-    axios.get("http://localhost:5000/api/posts").then((res) => {
-      setPosts(res.data);
-    });
-  };
+  const getPost = useCallback(() => {
+    
+        axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/api/posts`).then((res) => {
+          setPosts(res.data);
+        });
+      ;
+  },[]) 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const user = JSON.parse(localStorage.getItem("user"));
     axios
-      .post("http://localhost:5000/api/post", {
+      .post(`${process.env.REACT_APP_BASE_ENDPOINT}/api/post`, {
         userId: user._id,
         content: content,
         title:title,

@@ -17,7 +17,7 @@ function Login() {
         let password = values.password
         console.log(email,password);
         axios
-          .post("http://localhost:5000/api/login", {
+          .post(`${process.env.REACT_APP_BASE_ENDPOINT}/api/login`, {
             email: email,
             password: password,
           })
